@@ -1,4 +1,4 @@
-FCC Weather App
+# FCC Weather App
 
 Hi! This is the second intermediate-level front-end development project from FreeCodeCamp.com – an app to show the local weather. It is not an original concept, but it is entirely my own original code.
 
