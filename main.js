@@ -18,6 +18,8 @@ function success(position) {
 	$("#lon").html(myLon); // TEST CODE
 }
 
+// NOTE TO SELF! all code below should be inside 'success' function, shouldn't it?
+
 // Create XHR object
 let myrequest = new XMLHttpRequest();
 
@@ -29,13 +31,16 @@ myrequest.onreadystatechange = function() {
 }
 
 // Create variable to hold personalized URL
-let weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lon=" + myLon + "&lat=" + myLat + "/";
+// let weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lon=" + myLon + "&lat=" + myLat + "/";
 
 // Open a request
-myrequest.open("GET", weatherAPI);
+myrequest.open("GET", "https://fcc-weather-api.glitch.me/api/current?lon=" + myLon + "&lat=" + myLat + "/");
 
-// Send the request
-myrequest.send();
+// Send the request (inside a function, in order to engage the button)
+function sendAJAX() {
+  myrequest.send();
+}
+
 
 // function showWeather(lat, lon) {
 //   const weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lon=" + lon + "&lat=" + lat + "/";
