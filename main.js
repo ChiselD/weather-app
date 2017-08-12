@@ -14,8 +14,8 @@ function success(position) {
   myLat = Math.round(position.coords.latitude);
 	myLon = Math.round(position.coords.longitude);
   // insert variables into corresponding HTML paragraphs // TEST CODE
-	$("#lat").html(myLat);
-	$("#lon").html(myLon);
+	$("#lat").html(myLat); // TEST CODE
+	$("#lon").html(myLon); // TEST CODE
 }
 
 function showWeather(lat, lon) {
