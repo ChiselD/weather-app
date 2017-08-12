@@ -6,14 +6,11 @@ $(document).ready(function() {
   let position = x.getCurrentPosition(success, failure);
 });
 
+
 function failure(position) {
   $("#lat").text("Attempt to get coordinates failed.");
 }
 
-// Send the request (inside a function, in order to engage the button)
-function sendAJAX() {
-  myRequest.send();
-}
 
 function success(position) {
   // define variables to represent user's lat & lon
@@ -23,7 +20,12 @@ function success(position) {
 	$("#lat").html(myLat); // TEST CODE
 	$("#lon").html(myLon); // TEST CODE
 
+  // Now send received coords in order to get weather info!
+  showWeather(myLat, myLon);
+}
 
+
+function showWeather(lat, lon) {
   // Create XHR object
   myRequest = new XMLHttpRequest();
 
@@ -35,21 +37,20 @@ function success(position) {
   }
 
   // Create variable to hold personalized URL
-  let weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lon=" + myLon + "&lat=" + myLat + "/";
+  let weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lon=" + lon + "&lat=" + lat + "/";
 
   // Open a request
   myRequest.open("GET", weatherAPI);
 
   // TEST CODE
   console.log(weatherAPI);
+};
 
+
+// Send the request (inside a function, in order to engage the button)
+function sendAJAX() {
+  myRequest.send();
 }
-
-
-// function showWeather(lat, lon) {
-//   const weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lon=" + lon + "&lat=" + lat + "/";
-//   console.log("weatherAPI is: " + weatherAPI); // TEST
-// };
 
 
 
