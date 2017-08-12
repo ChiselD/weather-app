@@ -18,7 +18,26 @@ function success(position) {
 	$("#lon").html(myLon); // TEST CODE
 }
 
-function showWeather(lat, lon) {
-  const weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lon=" + lon + "&lat=" + lat + "/";
-  console.log("weatherAPI is: " + weatherAPI); // TEST
-};
+// Create XHR object
+let myrequest = new XMLHttpRequest();
+
+// Create callback function
+myrequest.onreadystatechange = function() {
+  if (myrequest.readyState === 4) {
+    document.getElementById('destination').innerHTML = myrequest.responseText;
+  }
+}
+
+// Create variable to hold personalized URL
+let weatherAPI = "https://fcc-weather-api.glitch.me/";
+
+// Open a request
+myrequest.open("GET", weatherAPI);
+
+// Send the request
+myrequest.send();
+
+// function showWeather(lat, lon) {
+//   const weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lon=" + lon + "&lat=" + lat + "/";
+//   console.log("weatherAPI is: " + weatherAPI); // TEST
+// };
