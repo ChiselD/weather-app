@@ -29,7 +29,7 @@ myrequest.onreadystatechange = function() {
 }
 
 // Create variable to hold personalized URL
-let weatherAPI = "https://fcc-weather-api.glitch.me/";
+let weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lon=" + myLon + "&lat=" + myLat + "/";
 
 // Open a request
 myrequest.open("GET", weatherAPI);
@@ -41,3 +41,7 @@ myrequest.send();
 //   const weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lon=" + lon + "&lat=" + lat + "/";
 //   console.log("weatherAPI is: " + weatherAPI); // TEST
 // };
+
+
+
+//////
