@@ -1,12 +1,18 @@
 $(document).ready(function() {
   let myLat;
   let myLon;
+  let myRequest;
   let x = navigator.geolocation;
   let position = x.getCurrentPosition(success, failure);
 });
 
 function failure(position) {
   $("#lat").text("Attempt to get coordinates failed.");
+}
+
+// Send the request (inside a function, in order to engage the button)
+function sendAJAX() {
+  myRequest.send();
 }
 
 function success(position) {
@@ -16,29 +22,27 @@ function success(position) {
   // insert variables into corresponding HTML paragraphs // TEST CODE
 	$("#lat").html(myLat); // TEST CODE
 	$("#lon").html(myLon); // TEST CODE
-}
 
-// NOTE TO SELF! all code below should be inside 'success' function, shouldn't it?
 
-// Create XHR object
-let myrequest = new XMLHttpRequest();
+  // Create XHR object
+  myRequest = new XMLHttpRequest();
 
-// Create callback function
-myrequest.onreadystatechange = function() {
-  if (myrequest.readyState === 4) {
-    document.getElementById('destination').innerHTML = myrequest.responseText;
+  // Create callback function
+  myRequest.onreadystatechange = function() {
+    if (myRequest.readyState === 4) {
+      document.getElementById('destination').innerHTML = myRequest.responseText;
+    }
   }
-}
 
-// Create variable to hold personalized URL
-// let weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lon=" + myLon + "&lat=" + myLat + "/";
+  // Create variable to hold personalized URL
+  let weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lon=" + myLon + "&lat=" + myLat + "/";
 
-// Open a request
-myrequest.open("GET", "https://fcc-weather-api.glitch.me/api/current?lon=" + myLon + "&lat=" + myLat + "/");
+  // Open a request
+  myRequest.open("GET", weatherAPI);
 
-// Send the request (inside a function, in order to engage the button)
-function sendAJAX() {
-  myrequest.send();
+  // TEST CODE
+  console.log(weatherAPI);
+
 }
 
 
