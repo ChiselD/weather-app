@@ -37,7 +37,9 @@ function success(position) {
     $("#temperature").text(weatherReport.main.temp);
     $("#weather").text(weatherReport.weather[0].main);
     $("#detailed").text(weatherReport.weather[0].description);
+    $("#icon").attr("src", weatherReport.weather[0].icon);
   }
+
   // Get weather info as JSON
   $.getJSON(weatherAPI, showWeather);
 
