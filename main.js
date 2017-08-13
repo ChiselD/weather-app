@@ -33,8 +33,10 @@ function success(position) {
 
   // Define showWeather function
   function showWeather(weatherReport) {
+  	$("#location").text(weatherReport.name);
     $("#temperature").text(weatherReport.main.temp);
     $("#weather").text(weatherReport.weather[0].main);
+    $("#detailed").text(weatherReport.weather[0].description);
   }
   // Get weather info as JSON
   $.getJSON(weatherAPI, showWeather);
