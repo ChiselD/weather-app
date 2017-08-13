@@ -2,19 +2,42 @@ $(document).ready(function() {
   let myLat;
   let myLon;
   let myRequest;
-  let x = navigator.geolocation;
-  console.log(x);
-  // let position = x.getCurrentPosition(success, failure);
-
-  // Check to see if geolocation worked to get coordinates or not
-  // if (success condition) {
-  // 	success();
-  // } else {
-  // 	failure();
-  // }
-  success();
+  let position = navigator.geolocation.getCurrentPosition(success, failure, {timeout: 10000});
 });
 
-function success() {
-	//
+function success(position) {
+
+  // Define variables to represent user's lat & lon
+  myLat = Math.round(position.coords.latitude);
+  myLon = Math.round(position.coords.longitude);
+
+  // Confirm that lat and lon were successfully identified // TEST CODE
+  console.log("Your latitude is " + myLat + " and your longitude is " + myLon); // TEST CODE
+
+  // Create variable to hold personalized URL for user
+  let weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lon=" + myLon + "&lat=" + myLat;
+  console.log(weatherAPI); // TEST CODE
+
+  // Create XHR object
+  myRequest = new XMLHttpRequest();
+
+  // Create callback function
+  myRequest.onreadystatechange = function() {
+    if (myRequest.readyState === 4) {
+      document.getElementById('destination').innerHTML = myRequest.responseText;
+    }
+  }
+
+  // Open a request
+  myRequest.open("GET", weatherAPI);
+
+}
+
+// Send the request (inside a function, so that the code only runs once you click the button)
+function sendAJAX() {
+	myRequest.send();
+}
+
+function failure(position) {
+  $("#destination").text("Attempt to get coordinates failed.");
 }
