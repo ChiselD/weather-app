@@ -11,6 +11,11 @@ function failure(position) {
   $("#lat").text("Attempt to get coordinates failed.");
 }
 
+// function to get 'weather' data from JSON object and show it on the page
+function displayWeather() {
+  $("#weather").html(data.weather);
+}
+
 
 function success(position) {
   // define variables to represent user's lat & lon
@@ -21,7 +26,15 @@ function success(position) {
 	$("#lon").html(myLon); // TEST CODE
 
   // Now send received coords in order to get weather info!
-  showWeather(myLat, myLon);
+  // showWeather(myLat, myLon);
+  // displayWeather();
+
+  const data = {
+    "weather": weatherAPI.weather[0].main,
+    "description": weatherAPI.weather[0].description,
+    "icon": weatherAPI.weather[0].icon,
+    "temp": weatherAPI.main.temp
+  };
 }
 
 
