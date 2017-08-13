@@ -2,43 +2,22 @@ $(document).ready(function() {
   let myLat;
   let myLon;
   let myRequest;
-  let x = navigator.geolocation;
-  let position = x.getCurrentPosition(success, failure);
+  let position = navigator.geolocation.getCurrentPosition(success, failure, {timeout: 10000});
 });
 
-
-function failure(position) {
-  $("#lat").text("Attempt to get coordinates failed.");
-}
-
-// function to get 'weather' data from JSON object and show it on the page
-function displayWeather() {
-  $("#weather").html(data.weather);
-}
-
-
 function success(position) {
-  // define variables to represent user's lat & lon
+
+  // Define variables to represent user's lat & lon
   myLat = Math.round(position.coords.latitude);
-	myLon = Math.round(position.coords.longitude);
-  // insert variables into corresponding HTML paragraphs // TEST CODE
-	$("#lat").html(myLat); // TEST CODE
-	$("#lon").html(myLon); // TEST CODE
+  myLon = Math.round(position.coords.longitude);
 
-  // Now send received coords in order to get weather info!
-  // showWeather(myLat, myLon);
-  // displayWeather();
+  // Confirm that lat and lon were successfully identified // TEST CODE
+  console.log("Your latitude is " + myLat + " and your longitude is " + myLon); // TEST CODE
 
-  const data = {
-    "weather": weatherAPI.weather[0].main,
-    "description": weatherAPI.weather[0].description,
-    "icon": weatherAPI.weather[0].icon,
-    "temp": weatherAPI.main.temp
-  };
-}
+  // Create variable to hold personalized URL for user
+  let weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lon=" + myLon + "&lat=" + myLat;
+  console.log("weatherAPI is: " + weatherAPI); // TEST CODE
 
-
-function showWeather(lat, lon) {
   // Create XHR object
   myRequest = new XMLHttpRequest();
 
@@ -49,20 +28,29 @@ function showWeather(lat, lon) {
     }
   }
 
-  // Create variable to hold personalized URL for user
-  let weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lon=" + lon + "&lat=" + lat;
-
   // Open a request
   myRequest.open("GET", weatherAPI);
 
-  // TEST CODE
-  console.log(weatherAPI);
-};
+  // Define showWeather function
+  function showWeather(weatherReport) {
+    $("#temperature").text(weatherReport.main.temp);
+    $("#weather").text(weatherReport.weather[0].main);
+  }
+  // Get weather info as JSON
+  $.getJSON(weatherAPI, showWeather);
+
+}
 
 
 // Send the request (inside a function, so that the code only runs once you click the button)
 function sendAJAX() {
   myRequest.send();
+}
+
+
+// Function to run if coordinates could not be found
+function failure(position) {
+  $("#destination").text("Attempt to get coordinates failed.");
 }
 
 
