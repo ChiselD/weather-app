@@ -36,8 +36,8 @@ function showWeather(lat, lon) {
     }
   }
 
-  // Create variable to hold personalized URL
-  let weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lon=" + lon + "&lat=" + lat + "/";
+  // Create variable to hold personalized URL for user
+  let weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lon=" + lon + "&lat=" + lat;
 
   // Open a request
   myRequest.open("GET", weatherAPI);
@@ -47,7 +47,7 @@ function showWeather(lat, lon) {
 };
 
 
-// Send the request (inside a function, in order to engage the button)
+// Send the request (inside a function, so that the code only runs once you click the button)
 function sendAJAX() {
   myRequest.send();
 }
