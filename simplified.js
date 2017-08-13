@@ -16,7 +16,7 @@ function success(position) {
 
   // Create variable to hold personalized URL for user
   let weatherAPI = "https://fcc-weather-api.glitch.me/api/current?lon=" + myLon + "&lat=" + myLat;
-  console.log(weatherAPI); // TEST CODE
+  console.log("weatherAPI is: " + weatherAPI); // TEST CODE
 
   // Create XHR object
   myRequest = new XMLHttpRequest();
@@ -30,6 +30,14 @@ function success(position) {
 
   // Open a request
   myRequest.open("GET", weatherAPI);
+
+  // Define showWeather function
+  function showWeather(weatherReport) {
+  	$("#temperature").text(weatherReport.main.temp);
+  	$("#weather").text(weatherReport.weather[0].main);
+  }
+  // Get weather info as JSON
+  $.getJSON(weatherAPI, showWeather);
 
 }
 
