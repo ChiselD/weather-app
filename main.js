@@ -8,8 +8,8 @@ $(document).ready(function() {
 function success(position) {
 
   // Define variables to represent user's lat & lon
-  myLat = Math.round(position.coords.latitude);
-  myLon = Math.round(position.coords.longitude);
+  myLat = position.coords.latitude;
+  myLon = position.coords.longitude;
 
   // Confirm that lat and lon were successfully identified // TEST CODE
   console.log("Your latitude is " + myLat + " and your longitude is " + myLon); // TEST CODE
