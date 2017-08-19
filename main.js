@@ -43,6 +43,9 @@ function success(position) {
   // Get weather info as JSON
   $.getJSON(weatherAPI, showWeather);
 
+  // Run function to toggle between Fahrenheit and Celsius
+  // $('#convert').on('click', toggleTemp);
+
 }
 
 
@@ -55,6 +58,30 @@ function sendAJAX() {
 // Function to run if coordinates could not be found
 function failure(position) {
   $("#destination").text("Attempt to get coordinates failed.");
+}
+
+
+// Function to toggle between Fahrenheit and Celsius
+function toggleTemp() {
+
+	const convert = document.getElementById("convert");
+	let currentCelsius;
+	let currentFahrenheit;
+
+	if (convert.innerHTML === "Celsius") {
+		let currentCelsiusText = $("#temperature").text();
+		currentCelsius = parseFloat(currentCelsiusText);
+		currentFahrenheit = (currentCelsius * 9/5) + 32;
+		$("#temperature").text(currentFahrenheit);
+		convert.innerHTML = "Fahrenheit";
+
+	} else {
+		let currentFahrenheitText = $("#temperature").text();
+		currentFahrenheit = parseFloat(currentFahrenheitText);
+		currentCelsius = (currentFahrenheit - 32) * 5/9;
+		$("#temperature").text(currentCelsius);
+		convert.innerHTML = "Celsius";
+	}
 }
 
 
