@@ -9,3 +9,6 @@ User Story: I can see the weather in my current location.
 User Story: I can see a different icon or background image (e.g. snowy mountain, hot desert) depending on the weather.
 
 User Story: I can push a button to toggle between Fahrenheit and Celsius.
+
+This project is currently NOT FUNCTIONAL, but you can still preview it here:<br />
+http://htmlpreview.github.io/?https://github.com/ChiselD/weather-app/blob/master/index.html
